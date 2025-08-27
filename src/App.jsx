@@ -30,13 +30,18 @@ function App() {
     }
   }
 
-  async function deleteTodo(id){
-    await supabase.from("todos").delete().eq("id",id);
+  async function deleteTodo(id) {
+    await supabase.from("todos").delete().eq("id", id);
     fetchTodos();
   }
 
   async function updateTodo(id, newTitle) {
-    await supabase.from("todos").update({title : newTitle}).eq("id", id);
+    await supabase.from("todos").update({ title: newTitle }).eq("id", id);
+    fetchTodos();
+  }
+
+  async function completeTodo(id) {
+    await supabase.from("todos").update({ completed: true }).eq("id", id);
     fetchTodos();
   }
 
@@ -56,12 +61,21 @@ function App() {
           .filter((t) => !t.completed)
           .map((todo) => (
             <>
-            <div key={todo.id}>
-              <span>{todo.title}</span>
-              <button>Complete</button>
-              <button onClick={() => updateTodo(todo.id, prompt("Enter a new title !", todo.title))}>Update</button>
-              <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-            </div>
+              <div key={todo.id}>
+                <span>{todo.title}</span>
+                <button onClick={() => completeTodo(todo.id)}>Complete</button>
+                <button
+                  onClick={() =>
+                    updateTodo(
+                      todo.id,
+                      prompt("Enter a new title !", todo.title)
+                    )
+                  }
+                >
+                  Update
+                </button>
+                <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+              </div>
             </>
           ))}
       </div>
@@ -72,10 +86,10 @@ function App() {
           .filter((t) => t.completed)
           .map((todo) => (
             <>
-            <div key={todo.id}>
-              <span>{todo.title}</span>
-              <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-            </div>
+              <div key={todo.id}>
+                <span>{todo.title}</span>
+                <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+              </div>
             </>
           ))}
       </div>
