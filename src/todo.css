@@ -1,7 +1,7 @@
 /* General App Styling */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  background: darkslategrey;
   margin: 0;
   padding: 0;
   display: flex;
@@ -13,7 +13,7 @@ body {
 .container {
   background: #fff;
   padding: 25px 30px;
-  margin-top: 40px;
+  margin-top: 70px;
   border-radius: 15px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   width: 380px;

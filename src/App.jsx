@@ -18,7 +18,6 @@ function App() {
 
     if (error) console.error(error);
     else setTodos(data);
-    console.log(data);
   }
 
   async function addTodo() {
