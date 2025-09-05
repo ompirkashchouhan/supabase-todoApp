@@ -1,3 +1,4 @@
+import "../src/todo.css";
 import React, { useState, useEffect } from "react";
 import supabase from "./helper/supabaseClient";
 
@@ -46,14 +47,17 @@ function App() {
   }
 
   return (
-    <div>
+    <section>
+    <div class="container">
       <h1>Todo List</h1>
       <input
+      class="input"
+        type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Add a new todo !"
       />
-      <button onClick={addTodo}>Add</button>
+      <button class="add-btn" onClick={addTodo}>Add</button>
 
       <h2>Incomplete Todos</h2>
       <div>
@@ -61,10 +65,10 @@ function App() {
           .filter((t) => !t.completed)
           .map((todo) => (
             <>
-              <div key={todo.id}>
-                <span>{todo.title}</span>
-                <button onClick={() => completeTodo(todo.id)}>Complete</button>
-                <button
+              <div class="todo-item" key={todo.id}>
+                <span class="todo-text">{todo.title}</span>
+                <button class="complete-btn" onClick={() => completeTodo(todo.id)}>Complete</button>
+                <button class="update-btn"
                   onClick={() =>
                     updateTodo(
                       todo.id,
@@ -74,7 +78,7 @@ function App() {
                 >
                   Update
                 </button>
-                <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+                <button class="delete-btn" onClick={() => deleteTodo(todo.id)}>Delete</button>
               </div>
             </>
           ))}
@@ -86,14 +90,15 @@ function App() {
           .filter((t) => t.completed)
           .map((todo) => (
             <>
-              <div key={todo.id}>
-                <span>{todo.title}</span>
-                <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+              <div class="todo-item completed" key={todo.id}>
+                <span class="todo-text">{todo.title}</span>
+                <button class="delete-btn" onClick={() => deleteTodo(todo.id)}>Delete</button>
               </div>
             </>
           ))}
       </div>
     </div>
+    </section>
   );
 }
 
